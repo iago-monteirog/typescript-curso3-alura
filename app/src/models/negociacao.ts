@@ -1,6 +1,15 @@
 import { Imprimivel } from "../utils/imprimivel.js";
 
 export class Negociacao implements Imprimivel{
+
+    public static criaDe(dataString: string, quantidadeString: string, valorString: string): Negociacao {
+        const exp = /-/g;
+        const date = new Date(dataString.replace(exp, ','));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, quantidade, valor);
+    }
+
     constructor(
         private _data: Date, 
         public readonly quantidade: number, 
@@ -24,11 +33,10 @@ export class Negociacao implements Imprimivel{
     `;
     }
 
-    public static criaDe(dataString: string, quantidadeString: string, valorString: string): Negociacao {
-        const exp = /-/g;
-        const date = new Date(dataString.replace(exp, ','));
-        const quantidade = parseInt(quantidadeString);
-        const valor = parseFloat(valorString);
-        return new Negociacao(date, quantidade, valor);
+    public ehIgual(negociacao: Negociacao): boolean {
+        return this.data.getDate() === negociacao.data.getDate()
+        && this.data.getMonth() ===  negociacao.data.getMonth()
+        && this.data.getFullYear() === negociacao.data.getFullYear();
     }
+
 }
