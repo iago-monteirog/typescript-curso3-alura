@@ -13,6 +13,7 @@ if (form) {
 }
 
 const botaoImporta = document.querySelector('#botao-importa');
+debugger
 if(botaoImporta) {
     botaoImporta.addEventListener('click', ()=> {
         controller.importaDados();
